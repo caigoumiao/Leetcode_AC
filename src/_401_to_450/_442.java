@@ -29,9 +29,31 @@ public class _442
         return res;
     }
 
+    public List<Integer> findDuplicates_2(int[] nums)
+    {
+        List<Integer> res = new ArrayList<>(nums.length);
+        int t;
+        for (int i = 0; i < nums.length; i++)
+        {
+            if (i != nums[i] && nums[i] == nums[nums[i]])
+                res.add(nums[i]);
+            while (i != nums[i])
+            {
+                t = nums[i];
+                nums[i] = nums[nums[i]];
+                nums[nums[i]] = t;
+            }
+        }
+        for (int i = 0; i < nums.length; i++)
+        {
+            System.out.println(i + " - " + nums[i]);
+        }
+        return res;
+    }
+
     public static void main(String[] args)
     {
-        int[] nums = new int[] {1 , 2 , 3 , 2};
-        new _442().findDuplicates(nums).forEach(System.out::println);
+        int[] nums = new int[] {1 , 2 , 3 , 4};
+        new _442().findDuplicates_2(nums).forEach(System.out::println);
     }
 }
